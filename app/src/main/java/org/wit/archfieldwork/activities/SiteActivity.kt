@@ -28,6 +28,8 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
                 app.sites.add(site.copy())
                 info("add Button Pressed: $siteName")
                 app.sites.forEach{info("add Button Pressed:${it}")}
+                setResult(AppCompatActivity.RESULT_OK)
+                finish()
             }
             else {
                 toast ("Please Enter a title")
