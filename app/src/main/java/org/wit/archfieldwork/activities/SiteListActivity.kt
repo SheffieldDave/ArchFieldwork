@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -24,10 +25,21 @@ class SiteListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_site_list)
         app = application as MainApp
 
+        toolbarMain.title = title
+        setSupportActionBar(toolbarMain)
+
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = SiteAdapter(app.sites)
+
+
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
 }
 
 class SiteAdapter constructor(private var sites: List<SiteModel>):RecyclerView.Adapter<SiteAdapter.MainHolder>(){
@@ -50,4 +62,5 @@ class SiteAdapter constructor(private var sites: List<SiteModel>):RecyclerView.A
             itemView.description.text = site.description
         }
     }
+
 }
