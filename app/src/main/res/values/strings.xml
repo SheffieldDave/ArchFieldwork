@@ -4,4 +4,5 @@
     <string name="hint_siteName">Site Nane</string>
     <string name="hint_siteDescription">Description</string>
     <string name="menu_addSite">Add</string>
+    <string name="menu_cancelSite">Cancel</string>
 </resources>
