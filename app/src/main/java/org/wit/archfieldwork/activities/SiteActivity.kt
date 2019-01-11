@@ -13,6 +13,7 @@ import org.wit.archfieldwork.models.SiteModel
 class SiteActivity : AppCompatActivity(), AnkoLogger {
 
     var site = SiteModel()
+    var sites = ArrayList<SiteModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,9 +22,12 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
 
         btnAdd.setOnClickListener() {
             site.name = siteName.text.toString()
+            site.description = description.text.toString()
 
             if (site.name.isNotEmpty()) {
+                sites.add(site)
                 info("add Button Pressed: $siteName")
+                sites.forEach{info("add Button Pressed:${it.name}")}
             }
             else {
                 toast ("Please Enter a title")
