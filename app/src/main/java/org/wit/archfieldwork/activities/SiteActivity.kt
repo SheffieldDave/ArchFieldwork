@@ -20,7 +20,7 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
 
     var site = SiteModel()
     lateinit var app: MainApp
-    var edit = false
+    var edit = false;
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
     //var location = Location(49.002590, 12.097409, 15f)
@@ -85,6 +85,7 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_site, menu)
+        if (edit && menu != null) menu.getItem(0).setVisible(true)
         return super.onCreateOptionsMenu(menu)
     }
 
