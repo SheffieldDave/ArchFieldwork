@@ -13,6 +13,7 @@ import org.wit.archfieldwork.R
 import kotlinx.android.synthetic.main.content_site_maps.*
 import org.wit.archfieldwork.R.id.mapView
 import org.wit.archfieldwork.R.id.toolbarMaps
+import org.wit.archfieldwork.helpers.readImageFromPath
 import org.wit.archfieldwork.main.MainApp
 
 
@@ -70,8 +71,12 @@ class SiteMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener{
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        currentTitle.text = marker.title
-        return false
+        val tag = marker.tag as Long
+        val site = app.sites.findById(tag)
+        currentTitle.text = site!!.name
+        currentDescription.text = site!!.description
+        imageView.setImageBitmap(readImageFromPath(this@SiteMapsActivity, site.image))
+        return true
     }
 }
 

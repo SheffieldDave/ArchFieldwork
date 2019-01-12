@@ -43,4 +43,9 @@ class SiteMemStore: SiteStore, AnkoLogger{
     override fun delete(site: SiteModel) {
         sites.remove(site)
     }
-}
+
+    override fun findById(id: Long): SiteModel? {
+        val foundSite: SiteModel? = sites.find{it.id == id}
+            return foundSite
+        }
+    }

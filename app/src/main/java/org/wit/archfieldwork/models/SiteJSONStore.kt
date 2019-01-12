@@ -71,4 +71,9 @@ class SiteJSONStore : SiteStore, AnkoLogger {
         sites.remove(site)
         serialize()
     }
+
+    override fun findById(id: Long): SiteModel? {
+        val foundSite: SiteModel? = sites.find {it.id == id}
+        return foundSite
+    }
 }
