@@ -9,6 +9,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.wit.archfieldwork.R
+import org.wit.archfieldwork.helpers.showImagePicker
 import org.wit.archfieldwork.main.MainApp
 import org.wit.archfieldwork.models.SiteModel
 
@@ -18,6 +19,7 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
     var site = SiteModel()
     lateinit var app : MainApp
     var edit = false
+    val IMAGE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +56,11 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             }
+
+        chooseImage.setOnClickListener{
+            info("Select image")
+            showImagePicker(this,IMAGE_REQUEST)
+        }
 
 
 
