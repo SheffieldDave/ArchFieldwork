@@ -31,8 +31,8 @@ class SiteListActivity : AppCompatActivity(), SiteListener {
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         //recyclerView.adapter = SiteAdapter(app.sites)
-        recyclerView.adapter = SiteAdapter(app.sites.findAll(),this)
-
+        //recyclerView.adapter = SiteAdapter(app.sites.findAll(),this)
+        loadSites()
 
     }
 
@@ -53,8 +53,18 @@ class SiteListActivity : AppCompatActivity(), SiteListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        recyclerView.adapter?.notifyDataSetChanged()
+        //recyclerView.adapter?.notifyDataSetChanged()
+        loadSites()
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun loadSites(){
+        showSites(app.sites.findAll())
+    }
+
+    fun showSites(sites:List<SiteModel>){
+        recyclerView.adapter = SiteAdapter (sites, this)
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 }
 
