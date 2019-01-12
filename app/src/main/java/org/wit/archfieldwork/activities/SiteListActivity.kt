@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_site_list.*
 import kotlinx.android.synthetic.main.card_site.view.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 
 import org.wit.archfieldwork.R
@@ -43,7 +44,8 @@ class SiteListActivity : AppCompatActivity(), SiteListener {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
-            R.id.item_add -> startActivityForResult<SiteActivity>(0)
+            R.id.item_add -> startActivityForResult<SiteActivity>(200)
+            R.id.item_map -> startActivity<SiteMapsActivity>()
         }
         return super.onOptionsItemSelected(item)
     }

@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="org.wit.archfieldwork">
 
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
@@ -32,6 +31,11 @@
         <activity
                 android:name=".activities.MapsActivity"
                 android:label="@string/title_activity_maps">
+        </activity>
+        <activity
+                android:name=".activities.SiteMapsActivity"
+                android:label="@string/title_activity_site_maps"
+                android:theme="@style/AppTheme">
         </activity>
     </application>
 
