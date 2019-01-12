@@ -8,7 +8,13 @@ import kotlinx.android.synthetic.main.card_site.view.*
 import org.wit.archfieldwork.R
 import org.wit.archfieldwork.models.SiteModel
 
-class SiteAdapter constructor(private var sites: List<SiteModel>): RecyclerView.Adapter<SiteAdapter.MainHolder>(){
+interface SiteListener{
+    fun onSiteClick(site: SiteModel)
+}
+
+
+class SiteAdapter constructor(private var sites: List<SiteModel>,
+                              private val listener: SiteListener): RecyclerView.Adapter<SiteAdapter.MainHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         return MainHolder(LayoutInflater.from(parent?.context).inflate(R.layout.card_site,parent,false))
@@ -16,17 +22,19 @@ class SiteAdapter constructor(private var sites: List<SiteModel>): RecyclerView.
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val site = sites[holder.adapterPosition]
-        holder.bind(site)
+        holder.bind(site,listener )
     }
 
     override fun getItemCount(): Int  = sites.size
 
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        fun bind(site: SiteModel){
+        fun bind(site: SiteModel, listener: SiteListener){
             itemView.siteName.text = site.name
             itemView.description.text = site.description
+            itemView.setOnClickListener { listener.onSiteClick(site) }
         }
     }
+
 
 }

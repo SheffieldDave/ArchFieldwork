@@ -1,5 +1,6 @@
 package org.wit.archfieldwork.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -8,13 +9,14 @@ import android.view.*
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_site_list.*
 import kotlinx.android.synthetic.main.card_site.view.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 
 import org.wit.archfieldwork.R
 import org.wit.archfieldwork.main.MainApp
 import org.wit.archfieldwork.models.SiteModel
 
-class SiteListActivity : AppCompatActivity() {
+class SiteListActivity : AppCompatActivity(), SiteListener {
 
     lateinit var app: MainApp
 
@@ -28,7 +30,8 @@ class SiteListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = SiteAdapter(app.sites)
+        //recyclerView.adapter = SiteAdapter(app.sites)
+        recyclerView.adapter = SiteAdapter(app.sites.findAll(),this)
 
 
     }
@@ -43,6 +46,15 @@ class SiteListActivity : AppCompatActivity() {
             R.id.item_add -> startActivityForResult<SiteActivity>(0)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSiteClick(site: SiteModel) {
+        startActivityForResult(intentFor<SiteActivity>().putExtra("site_edit", site),0)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        recyclerView.adapter?.notifyDataSetChanged()
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }
 

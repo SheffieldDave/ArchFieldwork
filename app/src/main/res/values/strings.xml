@@ -5,4 +5,6 @@
     <string name="hint_siteDescription">Description</string>
     <string name="menu_addSite">Add</string>
     <string name="menu_cancelSite">Cancel</string>
+    <string name="enter_site_name">Please enter a Name</string>
+    <string name="save_site">Save Site</string>
 </resources>

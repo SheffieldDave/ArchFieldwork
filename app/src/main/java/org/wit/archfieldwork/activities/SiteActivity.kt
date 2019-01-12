@@ -17,6 +17,7 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
 
     var site = SiteModel()
     lateinit var app : MainApp
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,20 +27,35 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
         toolbarAdd.title = title
         setSupportActionBar(toolbarAdd)
 
+        if(intent.hasExtra("site_edit")){
+            edit = true
+            site = intent.extras.getParcelable<SiteModel>("site_edit")
+            siteName.setText(site.name)
+            description.setText(site.description)
+            btnAdd.setText(R.string.save_site)
+        }
+
         btnAdd.setOnClickListener() {
             site.name = siteName.text.toString()
             site.description = description.text.toString()
-            if (site.name.isNotEmpty()) {
-                app.sites.add(site.copy())
+            if (site.name.isEmpty()) {
+                //app.sites.add(site.copy())
+                toast(R.string.enter_site_name)
+            }else {
+                if (edit) {
+                    app.sites.update(site.copy())
+                } else {
+                    app.sites.create(site.copy())
+                }
+            }
                 info("add Button Pressed: $siteName")
-                app.sites.forEach{info("add Button Pressed:${it}")}
+                //app.sites.forEach{info("add Button Pressed:${it}")}
+                //app.sites.findAll().forEach{info("add Button Pressed:${it}")}
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             }
-            else {
-                toast ("Please Enter a title")
-            }
-        }
+
+
 
     }
 
