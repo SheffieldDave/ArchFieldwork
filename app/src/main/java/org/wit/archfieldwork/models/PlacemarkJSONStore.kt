@@ -43,8 +43,19 @@ class SiteJSONStore : SiteStore, AnkoLogger {
 
 
     override fun update(site: SiteModel) {
-        // todo
+        val sitesList = findAll() as ArrayList<SiteModel>
+        var foundPlacemark: SiteModel? = sitesList.find { p -> p.id == site.id }
+        if (foundPlacemark != null) {
+            foundPlacemark.name = site.name
+            foundPlacemark.description = site.description
+            foundPlacemark.image = site.image
+            foundPlacemark.lat = site.lat
+            foundPlacemark.lng = site.lng
+            foundPlacemark.zoom = site.zoom
+        }
+        serialize()
     }
+
 
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(sites, listType)
