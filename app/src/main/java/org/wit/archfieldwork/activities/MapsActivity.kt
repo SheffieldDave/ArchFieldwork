@@ -1,5 +1,7 @@
 package org.wit.archfieldwork.activities
 
+import android.app.Activity
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
@@ -54,5 +56,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             .position(loc)
         map.addMarker(options)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
+    }
+
+    override fun onBackPressed() {
+        val resultIntent = Intent()
+        resultIntent.putExtra("location", location)
+        setResult(Activity.RESULT_OK, resultIntent)
+        finish ()
+        super.onBackPressed()
     }
 }
