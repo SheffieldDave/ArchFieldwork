@@ -23,7 +23,7 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
     var edit = false
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
-    var location = Location(49.002590, 12.097409, 15f)
+    //var location = Location(49.002590, 12.097409, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +71,12 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
         }
 
         siteLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
+            if (site.zoom != 0f) {
+                location.lat =  site.lat
+                location.lng = site.lng
+                location.zoom = site.zoom
+            }
             startActivityForResult(intentFor<MapsActivity>().putExtra("location", location), LOCATION_REQUEST)
         }
 
@@ -103,7 +109,10 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
             }
             LOCATION_REQUEST -> {
                 if (data != null) {
-                    location = data.extras.getParcelable<Location>("location")
+                    val location = data.extras.getParcelable<Location>("location")
+                    site.lat = location.lat
+                    site.lng = location.lng
+                    site.zoom = location.zoom
                 }
             }
         }

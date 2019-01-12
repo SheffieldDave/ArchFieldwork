@@ -20,11 +20,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     private lateinit var map: GoogleMap
     var location = Location()
 
-    override fun onMarkerClick(marker: Marker): Boolean {
-        val loc = LatLng(location.lat, location.lng)
-        marker.setSnippet("GPS: " + loc.toString())
-        return false
-    }
+
 
     override fun onMarkerDragStart(marker: Marker) {
     }
@@ -71,5 +67,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         setResult(Activity.RESULT_OK, resultIntent)
         finish ()
         super.onBackPressed()
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        val loc = LatLng(location.lat, location.lng)
+        marker.setSnippet("GPS: " + loc.toString())
+        return false
     }
 }
