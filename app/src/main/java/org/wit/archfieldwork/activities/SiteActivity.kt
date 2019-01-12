@@ -39,6 +39,9 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
             description.setText(site.description)
             btnAdd.setText(R.string.save_site)
             siteImage.setImageBitmap(readImageFromPath(this,site.image))
+            if(site.image != null){
+                chooseImage.setText(R.string.change_site_image)
+            }
         }
 
         btnAdd.setOnClickListener() {
@@ -91,6 +94,7 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
                 if(data != null){
                     site.image = data.getData().toString()
                     siteImage.setImageBitmap(readImage(this, resultCode,data))      //show the Image
+                    chooseImage.setText(R.string.change_site_image)
                 }
             }
         }

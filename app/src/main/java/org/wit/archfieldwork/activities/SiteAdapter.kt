@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.card_site.view.*
 import org.wit.archfieldwork.R
+import org.wit.archfieldwork.helpers.readImageFromPath
 import org.wit.archfieldwork.models.SiteModel
 
 interface SiteListener{
@@ -32,6 +33,7 @@ class SiteAdapter constructor(private var sites: List<SiteModel>,
         fun bind(site: SiteModel, listener: SiteListener){
             itemView.siteName.text = site.name
             itemView.description.text = site.description
+            itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context,site.image))
             itemView.setOnClickListener { listener.onSiteClick(site) }
         }
     }
