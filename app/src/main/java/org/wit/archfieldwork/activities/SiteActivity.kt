@@ -1,5 +1,6 @@
 package org.wit.archfieldwork.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -9,6 +10,8 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.wit.archfieldwork.R
+import org.wit.archfieldwork.helpers.readImage
+import org.wit.archfieldwork.helpers.readImageFromPath
 import org.wit.archfieldwork.helpers.showImagePicker
 import org.wit.archfieldwork.main.MainApp
 import org.wit.archfieldwork.models.SiteModel
@@ -35,6 +38,7 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
             siteName.setText(site.name)
             description.setText(site.description)
             btnAdd.setText(R.string.save_site)
+            siteImage.setImageBitmap(readImageFromPath(this,site.image))
         }
 
         btnAdd.setOnClickListener() {
@@ -78,5 +82,17 @@ class SiteActivity : AppCompatActivity(), AnkoLogger {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode){
+            IMAGE_REQUEST -> {
+                if(data != null){
+                    site.image = data.getData().toString()
+                    siteImage.setImageBitmap(readImage(this, resultCode,data))      //show the Image
+                }
+            }
+        }
     }
 }
